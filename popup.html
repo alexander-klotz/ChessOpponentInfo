@@ -1,0 +1,25 @@
+<link href="popup.css" rel="stylesheet" type="text/css" />
+<script type="module" src="popup.js"></script>
+<script defer src="options.js" type="module"></script>
+
+<div class="container">
+  <div>
+    <div class="title">Choose which info to display</div>
+
+    <div class="bookmarks" id="bookmarks">
+      <form id="optionsForm">
+        <div class="header">  Total game count </div>
+        <label for="tgc"> <input type="checkbox" name="option" value="enable" id="tgc">enable</label>
+        <br/>
+        <div class="header">  Account age </div>
+        <label for="aa"><input type="checkbox" name="option" value="enable" id="aa">enable</label>
+        <br/>
+        <div class="header">  Average winrate last 'n' games </div>
+        <label for="aw"><input type="checkbox" name="option" value="enable" id="aw">enable</label>
+        <br/>
+        <label for="avgN"><input type="number" name="option" value="10" id="avgN" max="50" min="1"> Amount of games (n)</label>
+        <br/>
+      </form>
+    </div>
+  </div>
+</div>
