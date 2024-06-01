@@ -2,6 +2,14 @@
 const options = {};
 const optionsForm = document.getElementById("optionsForm");
 
+document.getElementById('aren').addEventListener('change', function() {
+  var checkboxes = ['arda', 'arra', 'arbl', 'arbu'];
+  checkboxes.forEach(function(id) {
+    document.getElementById(id).parentElement.style.display = this.checked ? '' : 'none';
+  }, this);
+});
+
+
 // Immediately persist options changes
 optionsForm.tgc.addEventListener("change", (event) => {
   options.tgc = event.target.checked;

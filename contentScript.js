@@ -1,5 +1,5 @@
 
-let headers = new Headers( {'User-Agent':'username: alex248player(AddonTesting), email: galaxylifezocker@gmail.com'});
+let headers = new Headers( {'User-Agent':'username: alex248player (AddonCreator), email: chessinfoaddon@gmail.com'});
 let textcolor = 'green' 
 let playerStats = undefined
 
