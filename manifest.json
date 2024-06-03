@@ -19,7 +19,9 @@
           "assets/bookmark.png",
           "assets/play.png",
           "assets/delete.png",
-          "assets/save.png"
+          "assets/save.png",
+          "assets/eloSign.png",
+          "assets/timeSign.png"
         ],
         "matches": ["https://*.chess.com/*"]
       }

@@ -51,5 +51,4 @@ optionsForm.addEventListener("change", async (event) => {
 
   chrome.storage.sync.set({ options });
   let test = await chrome.storage.sync.get("options");
-  console.log(test)
 });

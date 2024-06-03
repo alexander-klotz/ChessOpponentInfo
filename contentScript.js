@@ -27,7 +27,6 @@ const newGameStarted = async () => {
     const usernameElement = usernameElements[0];
     const opponentUsername = usernameElement.innerText
     textcolor = window.getComputedStyle(usernameElement).color;
-    console.log("aren: ", options.aren)
 
     if (options.tgc){
         await addTotalGamesPlayed(opponentUsername);
@@ -119,6 +118,11 @@ const addNGamesWinrate = async (n, opponentUsername) => {
 
 
 const addAccAge = async (opponentUsername) => {
+    var img = document.createElement("img");
+    img.src = chrome.runtime.getURL("./assets/timeSign.png");
+    img.style.height = "14.6px";
+    img.style.paddingTop = "2px";
+    img.style.marginLeft = "10px";
     const AccAgeExists = document.getElementsByClassName("AccAge")[0];
 
     if (AccAgeExists) {
@@ -141,6 +145,7 @@ const addAccAge = async (opponentUsername) => {
 
         const userTagLine = document.getElementsByClassName("user-tagline-component")[0];
         if (userTagLine) {
+            userTagLine.append(img)
             userTagLine.append(AccAgeSpan);
         } else {
             console.error('userTagLine element not found');
@@ -149,14 +154,18 @@ const addAccAge = async (opponentUsername) => {
 }
 
 const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, useBullet) => {
+    var img = document.createElement("img");
+    img.src = chrome.runtime.getURL("./assets/eloSign.png");
+    img.style.width = "35px";
+    img.style.paddingTop = "2px";
+    img.style.marginLeft = "10px";
+
     const AverageRatingExists = document.getElementsByClassName("AvgRating")[0];
 
     if (AverageRatingExists) {
         AverageRatingExists.innerText = '...'
     }
-    console.log("t3est")
     var averageRating = await getAverageRating(opponentUsername, useDaily, useRapid, useBlitz, useBullet);
-    console.log("t3est: ", averageRating)
     if (AverageRatingExists) {
         AverageRatingExists.innerText = '' + averageRating;
     } else {
@@ -171,6 +180,7 @@ const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, 
 
         const userTagLine = document.getElementsByClassName("user-tagline-component")[0];
         if (userTagLine) {
+            userTagLine.append(img)
             userTagLine.append(AvgRatingSpan);
         } else {
             console.error('userTagLine element not found');
@@ -275,7 +285,6 @@ async function lastNGamesWinrate(username, n){
         let attempts = 0;
         while(attempts < 5) {
             try {
-                console.log(formattedPreviousDate)
                 const response = await fetch(apiUrl.concat(formattedPreviousDate), {headers: headers});
                 if (!response.ok) {
                     if (response.status === 404) {
