@@ -2,15 +2,17 @@
   --main-color:#81b64c;
   --darker-color:#5e9948;
   --lighter-color:#aedd66;
+  --bg-color-lm: #b2bda55d;
+  --bg-color-dm: #1f221b; 
 }
 
 body{
-  background-color: #b2bda55d;
+  background-color: var(--bg-color-dm);
 }
 
 .container {
   width: 280px;
-  color: #314d3e;
+  color: var(--bg-color-lm);
 }
 
 
@@ -102,6 +104,10 @@ input[type=checkbox]{
   accent-color:  var(--lighter-color);  
 }
 
+input[type=number]{
+  margin: 3px;
+  background-color:  var(--lighter-color);  
+}
 .indentCheckBox{
   margin-left: 10px;
 }

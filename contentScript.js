@@ -21,12 +21,13 @@ const newGameStarted = async () => {
     removeElementsByClass("totalGames")
     removeElementsByClass("winrate")
     removeElementsByClass("AccAge")
+    removeElementsByClass("AvgRating")
 
     const usernameElements = document.getElementsByClassName("user-username-component user-username-white user-username-link user-tagline-username");
     const usernameElement = usernameElements[0];
     const opponentUsername = usernameElement.innerText
     textcolor = window.getComputedStyle(usernameElement).color;
-    
+    console.log("aren: ", options.aren)
 
     if (options.tgc){
         await addTotalGamesPlayed(opponentUsername);
@@ -39,7 +40,13 @@ const newGameStarted = async () => {
     if (options.aw){
         setTimeout(async () => {
             await addNGamesWinrate(options.avgN, opponentUsername);
-        }, 200); // Delay of 0.2 second
+        }, 200); // Delay of 0.1 second
+    }
+
+    if (options.aren){
+        setTimeout(async () => {
+            await addAverageRating(opponentUsername, options.arda, options.arra, options.arbl, options.arbu);
+        }, 300); // Delay of 0.1 second
     }
 }
 
@@ -135,6 +142,36 @@ const addAccAge = async (opponentUsername) => {
         const userTagLine = document.getElementsByClassName("user-tagline-component")[0];
         if (userTagLine) {
             userTagLine.append(AccAgeSpan);
+        } else {
+            console.error('userTagLine element not found');
+        }
+    }
+}
+
+const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, useBullet) => {
+    const AverageRatingExists = document.getElementsByClassName("AvgRating")[0];
+
+    if (AverageRatingExists) {
+        AverageRatingExists.innerText = '...'
+    }
+    console.log("t3est")
+    var averageRating = await getAverageRating(opponentUsername, useDaily, useRapid, useBlitz, useBullet);
+    console.log("t3est: ", averageRating)
+    if (AverageRatingExists) {
+        AverageRatingExists.innerText = '' + averageRating;
+    } else {
+        const AvgRatingSpan = document.createElement("SPAN");
+
+        AvgRatingSpan.className = "chess-info " + "AvgRating";
+        AvgRatingSpan.title = `Average Rating`;
+        AvgRatingSpan.style.color = textcolor;
+
+        var text = document.createTextNode('' + averageRating);
+        AvgRatingSpan.appendChild(text);
+
+        const userTagLine = document.getElementsByClassName("user-tagline-component")[0];
+        if (userTagLine) {
+            userTagLine.append(AvgRatingSpan);
         } else {
             console.error('userTagLine element not found');
         }
@@ -369,7 +406,7 @@ function readablizeTime(secondsDiff){
  * @param {Boolean} includeBullet
  * @returns {Number} the average rating of <username> of all the specified rating types
  */
-async function averageRating(username, includeDaily, includeRapid, includeBlitz, includeBullet){
+async function getAverageRating(username, includeDaily, includeRapid, includeBlitz, includeBullet){
     const apiUrl = `https://api.chess.com/pub/player/${username}/stats`;
     const includeTimeControl = [includeDaily, includeRapid, includeBlitz, includeBullet]
 
