@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(function (request) {
     });
 
 
-// TODO: fix that we need to remove the old logos/signs and check if the N for the WR is updated correctly
+// TODO: fix that we need to remove the old logos/signs
 const newGameStarted = async () => {
 
     // reset the playerStats
@@ -26,6 +26,7 @@ const newGameStarted = async () => {
     removeElementsByClass("winrate")
     removeElementsByClass("AccAge")
     removeElementsByClass("AvgRating")
+    removeElementsByClass("ChessInfoExtLogo")
 
     const usernameElements = document.getElementsByClassName("user-username-component user-username-white user-username-link user-tagline-username");
     const usernameElement = usernameElements[0];
@@ -68,6 +69,7 @@ function removeElementsByClass(className){
 
 const addTotalGamesPlayed = async (opponentUsername) => {
     var img = document.createElement("img");
+    img.className = "ChessInfoExtLogo";
     img.src = chrome.runtime.getURL(`./assets/totalGamesSign${ModeAppendix}.png`);
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
@@ -104,6 +106,7 @@ const addTotalGamesPlayed = async (opponentUsername) => {
 const addNGamesWinrate = async (n, opponentUsername) => {
     var img = document.createElement("img");
     img.src = chrome.runtime.getURL(`./assets/winrateSign${ModeAppendix}.png`);
+    img.className = "ChessInfoExtLogo";
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
     img.style.marginLeft = "10px";
@@ -141,6 +144,7 @@ const addNGamesWinrate = async (n, opponentUsername) => {
 const addAccAge = async (opponentUsername) => {
     var img = document.createElement("img");
     img.src = chrome.runtime.getURL(`./assets/timeSign${ModeAppendix}.png`);
+    img.className = "ChessInfoExtLogo";
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
     img.style.marginLeft = "10px";
@@ -177,6 +181,7 @@ const addAccAge = async (opponentUsername) => {
 const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, useBullet) => {
     var img = document.createElement("img");
     img.src = chrome.runtime.getURL(`./assets/eloSign${ModeAppendix}.png`);
+    img.className = "ChessInfoExtLogo";
     img.style.width = "35px";
     img.style.paddingTop = "2px";
     img.style.marginLeft = "10px";
