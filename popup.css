@@ -43,48 +43,9 @@ body{
   margin-top: 0.8rem;
 }
 
-.textbox {
-  width: 100%;
-  font-size: 12px;
-  margin: 0;
-  padding: 0px 2px;
-}
-
-.textbox:focus {
-  outline: 0;
-  border-color: #66afe9;
-}
-
-.bookmarks {
-  margin: 5px 5px;
-  padding: 3px;
-}
-
-.bookmark {
+.optionsDiv {
   display: flex;
-  border-bottom-color: #00254d;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-radius: 0.8rem;
   padding: 3px;
-  padding-bottom: 7px;
-  margin-bottom: 7px;
-}
-
-.bookmark-title {
-  padding-left: 2px;
-}
-
-.bookmark-controls img {
-  margin: 0 4px;
-  width: 18px;
-  height: 18px;
-  cursor: pointer;
-}
-
-.bookmark-controls {
-  flex: auto;
-  text-align: right;
 }
 
 #avgN{
@@ -118,14 +79,10 @@ label {
 }
 
 
-
-
 body.dark {background-color: var(--bg-color-dm);}
 
 body.dark label {color: var(--darker-color)}
 body.dark .checkboxLabel {background-color: #464646}
-
-
 
 .checkbox {
   opacity: 0;
@@ -169,4 +126,14 @@ body.dark .checkboxLabel {background-color: #464646}
 
 .checkbox:checked + .checkboxLabel .ball {
   transform: translateX(24px);
+}
+
+#checkbox-mode{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#optionsForm{
+  margin: 0;
 }
