@@ -20,6 +20,10 @@ optionsForm.arda.checked = Boolean(options.arda);
 optionsForm.arra.checked = Boolean(options.arra);
 optionsForm.arbl.checked = Boolean(options.arbl);
 optionsForm.arbu.checked = Boolean(options.arbu);
+optionsForm.darkmode.checked = Boolean(options.darkmode);
+if(Boolean(options.darkmode)){
+  document.body.classList.toggle("dark")
+}
 if (!options.avgN){
   optionsForm.avgN.value = 10
   options.avgN = 10
@@ -50,5 +54,12 @@ optionsForm.addEventListener("change", async (event) => {
   }
 
   chrome.storage.sync.set({ options });
-  let test = await chrome.storage.sync.get("options");
+  console.log(options)
 });
+
+
+
+const checkbox = document.getElementById("checkbox-mode")
+checkbox.addEventListener("change", () => {
+  document.body.classList.toggle("dark")
+})
