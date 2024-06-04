@@ -2,6 +2,7 @@
 let headers = new Headers( {'User-Agent':'username: alex248player (AddonCreator), email: chessinfoaddon@gmail.com'});
 let textcolor = 'green' 
 let playerStats = undefined
+let ModeAppendix = ""  // this is used to append a string to the image names in case the webiste is in darkmode (light versions of pngs will be used)
 
 chrome.runtime.onMessage.addListener(function (request) {
     const { type, value } = request;
@@ -11,10 +12,13 @@ chrome.runtime.onMessage.addListener(function (request) {
       }
     });
 
+
+// TODO: fix that we need to remove the old logos/signs and check if the N for the WR is updated correctly
 const newGameStarted = async () => {
 
     // reset the playerStats
-    let playerStats = undefined
+    playerStats = undefined
+    ModeAppendix = ""
 
     const optionsData = await chrome.storage.sync.get("options");
     const options = optionsData.options
@@ -27,6 +31,11 @@ const newGameStarted = async () => {
     const usernameElement = usernameElements[0];
     const opponentUsername = usernameElement.innerText
     textcolor = window.getComputedStyle(usernameElement).color;
+    if(isElPropColor(textcolor, 'white')){
+        console.log("Darkmode is active")
+        ModeAppendix = "Light"
+    }
+
 
     if (options.tgc){
         await addTotalGamesPlayed(opponentUsername);
@@ -58,6 +67,11 @@ function removeElementsByClass(className){
 
 
 const addTotalGamesPlayed = async (opponentUsername) => {
+    var img = document.createElement("img");
+    img.src = chrome.runtime.getURL(`./assets/totalGamesSign${ModeAppendix}.png`);
+    img.style.height = "14.6px";
+    img.style.paddingTop = "2px";
+    img.style.marginLeft = "10px";
     const totalGamesExists = document.getElementsByClassName("totalGames")[0];
 
     if (totalGamesExists) {
@@ -79,6 +93,7 @@ const addTotalGamesPlayed = async (opponentUsername) => {
 
         const userTagLine = document.getElementsByClassName("user-tagline-component")[0];
         if (userTagLine) {
+            userTagLine.append(img)
             userTagLine.append(totalGames);
         } else {
             console.error('userTagLine element not found');
@@ -87,6 +102,11 @@ const addTotalGamesPlayed = async (opponentUsername) => {
 }
 
 const addNGamesWinrate = async (n, opponentUsername) => {
+    var img = document.createElement("img");
+    img.src = chrome.runtime.getURL(`./assets/winrateSign${ModeAppendix}.png`);
+    img.style.height = "14.6px";
+    img.style.paddingTop = "2px";
+    img.style.marginLeft = "10px";
     const winrateExists = document.getElementsByClassName("winrate")[0];
 
     if (winrateExists) {
@@ -109,6 +129,7 @@ const addNGamesWinrate = async (n, opponentUsername) => {
 
         const userTagLine = document.getElementsByClassName("user-tagline-component")[0];
         if (userTagLine) {
+            userTagLine.append(img)
             userTagLine.append(winrateSpan);
         } else {
             console.error('userTagLine element not found');
@@ -119,7 +140,7 @@ const addNGamesWinrate = async (n, opponentUsername) => {
 
 const addAccAge = async (opponentUsername) => {
     var img = document.createElement("img");
-    img.src = chrome.runtime.getURL("./assets/timeSign.png");
+    img.src = chrome.runtime.getURL(`./assets/timeSign${ModeAppendix}.png`);
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
     img.style.marginLeft = "10px";
@@ -155,7 +176,7 @@ const addAccAge = async (opponentUsername) => {
 
 const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, useBullet) => {
     var img = document.createElement("img");
-    img.src = chrome.runtime.getURL("./assets/eloSign.png");
+    img.src = chrome.runtime.getURL(`./assets/eloSign${ModeAppendix}.png`);
     img.style.width = "35px";
     img.style.paddingTop = "2px";
     img.style.marginLeft = "10px";
@@ -450,5 +471,28 @@ async function getAverageRating(username, includeDaily, includeRapid, includeBli
     }
     
     return '' + Math.round(totalRating/timeControlCount);
+}
+
+
+/* ---- Helper Functions ---- */
+
+/**
+ * Test if Element color property holds a specific color.
+ * Modification from https://stackoverflow.com/a/60689673/383904
+ * 
+ * @param {Object} computedStyleColor The DOM Node Element
+ * @param {String} color A valid CSS color value
+ * @return {Boolean} True if element color matches
+ */
+function isElPropColor(computedStyleColor, color) {
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.fillStyle = color;
+    ctx.fillRect( 0, 0, 1, 1 );
+    ctx.fillStyle = computedStyleColor
+    ctx.fillRect( 1, 0, 1, 1 );
+    const a = JSON.stringify(Array.from(ctx.getImageData(0, 0, 1, 1).data));
+    const b = JSON.stringify(Array.from(ctx.getImageData(1, 0, 1, 1).data));
+    ctx.canvas = null;
+    return a === b;
 }
 

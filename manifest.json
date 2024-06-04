@@ -16,12 +16,14 @@
     "web_accessible_resources": [
       {
         "resources": [
-          "assets/bookmark.png",
-          "assets/play.png",
-          "assets/delete.png",
-          "assets/save.png",
           "assets/eloSign.png",
-          "assets/timeSign.png"
+          "assets/timeSign.png",
+          "assets/winrateSign.png",
+          "assets/totalGamesSign.png",
+          "assets/eloSignLight.png",
+          "assets/timeSignLight.png",
+          "assets/winrateSignLight.png",
+          "assets/totalGamesSignLight.png"
         ],
         "matches": ["https://*.chess.com/*"]
       }
