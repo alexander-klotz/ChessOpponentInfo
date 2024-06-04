@@ -13,7 +13,6 @@ chrome.runtime.onMessage.addListener(function (request) {
     });
 
 
-// TODO: fix that we need to remove the old logos/signs
 const newGameStarted = async () => {
 
     // reset the playerStats
