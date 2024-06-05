@@ -1,10 +1,10 @@
 # Info
 This chrome extension adds information about your current chess.com opponent next to the name as can be seen in the following image.
  
-![Extension preview](./examples/preview.PNG "Extension preview")
+![Extension preview](./examples/preview.png "Extension preview")
 
 The info that should be displayed can be chosen in the popup.
-![Popup preview](./examples/previewTheme.PNG "Popup preview")
+![Popup preview](./examples/previewTheme.png "Popup preview")
 
 
 # How to install
