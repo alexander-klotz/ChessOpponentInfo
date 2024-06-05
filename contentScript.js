@@ -72,7 +72,7 @@ const addTotalGamesPlayed = async (opponentUsername) => {
     img.src = chrome.runtime.getURL(`./assets/totalGamesSign${ModeAppendix}.png`);
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
-    img.style.marginLeft = "10px";
+    img.style.marginLeft = "2px";
     const totalGamesExists = document.getElementsByClassName("totalGames")[0];
 
     if (totalGamesExists) {
@@ -84,6 +84,7 @@ const addTotalGamesPlayed = async (opponentUsername) => {
         totalGamesExists.innerText = '' + calculatedTotalGames;
     } else {
         const totalGames = document.createElement("SPAN");
+        totalGames.style.marginRight = "8px";
 
         totalGames.className = "chess-info " + "totalGames";
         totalGames.title = "Total games played";
@@ -108,7 +109,7 @@ const addNGamesWinrate = async (n, opponentUsername) => {
     img.className = "ChessInfoExtLogo";
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
-    img.style.marginLeft = "10px";
+    img.style.marginLeft = "2px";
     const winrateExists = document.getElementsByClassName("winrate")[0];
 
     if (winrateExists) {
@@ -121,6 +122,7 @@ const addNGamesWinrate = async (n, opponentUsername) => {
         winrateExists.innerText = '' + calculatedWinrate;
     } else {
         const winrateSpan = document.createElement("SPAN");
+        winrateSpan.style.marginRight = "8px";
 
         winrateSpan.className = "chess-info " + "winrate";
         winrateSpan.title = `winrate over the last ${n} games`;
@@ -146,7 +148,7 @@ const addAccAge = async (opponentUsername) => {
     img.className = "ChessInfoExtLogo";
     img.style.height = "14.6px";
     img.style.paddingTop = "2px";
-    img.style.marginLeft = "10px";
+    img.style.marginLeft = "2px";
     const AccAgeExists = document.getElementsByClassName("AccAge")[0];
 
     if (AccAgeExists) {
@@ -159,6 +161,7 @@ const addAccAge = async (opponentUsername) => {
         AccAgeExists.innerText = '' + accAge;
     } else {
         const AccAgeSpan = document.createElement("SPAN");
+        AccAgeSpan.style.marginRight = "8px";
 
         AccAgeSpan.className = "chess-info " + "AccAge";
         AccAgeSpan.title = `Account age`;
@@ -183,7 +186,7 @@ const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, 
     img.className = "ChessInfoExtLogo";
     img.style.width = "35px";
     img.style.paddingTop = "2px";
-    img.style.marginLeft = "10px";
+    img.style.marginLeft = "2px";
 
     const AverageRatingExists = document.getElementsByClassName("AvgRating")[0];
 
@@ -195,6 +198,7 @@ const addAverageRating = async (opponentUsername, useDaily, useRapid, useBlitz, 
         AverageRatingExists.innerText = '' + averageRating;
     } else {
         const AvgRatingSpan = document.createElement("SPAN");
+        AvgRatingSpan.style.marginRight = "8px";
 
         AvgRatingSpan.className = "chess-info " + "AvgRating";
         AvgRatingSpan.title = `Average Rating`;
