@@ -1,7 +1,13 @@
 {
     "name": "Chess Opponent Info",
-    "version": "0.1.0",
+    "version": "0.0.1.0",
     "description": "Adds info to current chess.com opponent.",
+    "icons": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
     "permissions": ["storage", "tabs"],
     "host_permissions": ["https://*.chess.com/*"],
     "background": {
